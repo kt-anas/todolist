@@ -1,7 +1,7 @@
  // src/App.js
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo, toggleTodo, deleteTodo } from './redux/todoSlice';
+import { addTodo, deleteTodo } from './redux/todoSlice';
 import './App.css';
 
 function App() {
@@ -10,8 +10,7 @@ function App() {
   const dispatch = useDispatch();
 
   const handleAddTodo = () => {
-
-    if (inputValue.trim()) {
+    if (inputValue) {
       dispatch(addTodo(inputValue));
       setInputValue('');
     }
@@ -34,10 +33,10 @@ function App() {
     
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id} className={todo.completed ? 'completed' : ''}>
-            <span onClick={() => dispatch(toggleTodo(todo.id))}>
+          <li key={todo.id} >
+            <div>
               {todo.text}
-            </span>
+            </div>
             <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
           </li>
         ))}
