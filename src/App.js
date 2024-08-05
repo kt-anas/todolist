@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
   const [inputValue, setInputValue] = useState('');
-const [colorname,setColor] =useState('')
+ 
 
   const todos = useSelector((state) => state.todos.todos);
   const color = useSelector((state)=> state.todos.color);
@@ -24,11 +24,7 @@ const [colorname,setColor] =useState('')
 
   return (
     <div className="App">
-    <input type="text" name="" id="" value={colorname} 
-      onChange={(e)=>setColor(e.target.value)}
-    />
-  <button onClick={()=>dispatch(changeColor(colorname))}> Change</button>
-
+    
     
       <h1> List</h1>
      <form action="#">
@@ -48,11 +44,15 @@ const [colorname,setColor] =useState('')
           <li key={todo.id} >
             < div style={{color:color}}>
               {todo.text}
-            </div>
+            </div> 
             <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
           </li>
         ))}
       </ul>
+
+      <div style={{width:"100px",height:"100px", backgroundColor:color}}> <button onClick={()=>dispatch(changeColor("blue"))}>Change</button></div>
+      <div style={{width:"100px",height:"100px", backgroundColor:color}}><button onClick={()=>dispatch(changeColor("red"))}>change</button></div>
+
     </div>
   );
 }
