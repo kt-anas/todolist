@@ -1,18 +1,20 @@
  // src/App.js
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo, deleteTodo,changeColor } from './redux/todoSlice';
+import { addTodo, deleteTodo,colors } from './redux/todoSlice';
 import './App.css';
 
 function App() {
   const [inputValue, setInputValue] = useState('');
- 
+  const [flag,setFlag]  = useState(false);
+  
 
   const todos = useSelector((state) => state.todos.todos);
-  const color = useSelector((state)=> state.todos.color);
+  
+  const color1 = useSelector((state)=> state.todos.Color1);
+  const color2 = useSelector((state)=> state.todos.Color2);
 
-
-  console.log(todos);
+ 
   const dispatch = useDispatch();
  
   const handleAddTodo = () => {
@@ -42,16 +44,17 @@ function App() {
       <ul>
         {todos.map((todo) => (
           <li key={todo.id} >
-            < div style={{color:color}}>
+            < div >
               {todo.text}
             </div> 
             <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
           </li>
         ))}
       </ul>
+ 
+        <div onClick={()=>{setFlag(!flag);dispatch(colors(flag))}} style={{backgroundColor:color1, width:'100px', height:'100px'}}>first</div>
+        <div onClick={()=>{setFlag(!flag);dispatch(colors(flag))}} style={{backgroundColor:color2, width:'100px', height:'100px'}}>second</div>
 
-      <div style={{width:"100px",height:"100px", backgroundColor:color}}> <button onClick={()=>dispatch(changeColor("blue"))}>Change</button></div>
-      <div style={{width:"100px",height:"100px", backgroundColor:color}}><button onClick={()=>dispatch(changeColor("red"))}>change</button></div>
 
     </div>
   );
